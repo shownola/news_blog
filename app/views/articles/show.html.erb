@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="article-show">
+    <h2 class="text-center display-2 pt-5"><%= @article.title %></h2>
+
+    <div class="row pt-5">
+      Category: </h2><%= @article.category %>
+    </div>
+
+    <div class="">
+
+      <p class="pt-5 description"><%= simple_format(@article.content) %></p>
+    </div>
+  </div>
+</div>
