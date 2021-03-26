@@ -2,8 +2,12 @@
   <div class="article-show">
     <h2 class="text-center display-2 pt-5"><%= @article.title %></h2>
 
-    <div class="row pt-5">
-      Category: </h2><%= @article.category %>
+
+    <div class="pt-4">
+      Created by: <%= @article.user.email %>
+    </div>
+    <div class="pt-2">
+      Created by: <%= @article.category %>
     </div>
 
     <div class="">
@@ -11,4 +15,11 @@
       <p class="pt-5 description"><%= simple_format(@article.content) %></p>
     </div>
   </div>
+  <% if user_signed_in? && @article.user == current_user %>
+    <p>
+      <%= link_to 'Edit', edit_article_path, class: 'btn btn-warning' %>
+      <%= link_to 'Delete', article_path(@article), method: :delete, data: {confirrm: 'Are you sure?'}, class: 'btn btn-danger' %>
+    </p>
+  <% end %>
+
 </div>

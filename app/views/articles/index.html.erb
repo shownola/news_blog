@@ -14,7 +14,7 @@
     <tbody>
       <% @articles.each do |article| %>
       <tr>
-        <td><%= article.title %></td>
+        <td><%= link_to article.title, article_path(article) %></td>
         <td><%= article.category %></td>
         <td><%= article.user.email %></td>
         <td><%= article.content %></td>
