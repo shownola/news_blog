@@ -1,4 +1,9 @@
 <div class="container">
-  <div class="display-2">Edit Article</div>
-  <%= render 'form' %>
+  <% if logged_in?(:editor) && @article.user == current_user %>
+    <div class="display-2">Edit Article</div>
+    <%= render 'form' %>
+  <% else %>
+    <h3>You can only edit your own articles </h3>
+  <% end %>
+
 </div>

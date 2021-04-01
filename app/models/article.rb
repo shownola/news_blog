@@ -7,10 +7,17 @@ class Article < ApplicationRecord
   validates :user_id, presence: true
 
 
+
+
+
   def self.recent
     order(:category)
   end
+
   
+
+
+
 
 
 end
