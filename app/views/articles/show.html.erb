@@ -15,7 +15,8 @@
       <p class="pt-5 description"><%= simple_format(@article.content) %></p>
     </div>
   </div>
-  <% if user_signed_in? && @article.user == current_user %>
+  <% if logged_in?(:editor)  %>
+  <%# if user_signed_in? && @article.user == current_user %>
     <p>
       <%= link_to 'Edit', edit_article_path, class: 'btn btn-warning' %>
       <%= link_to 'Delete', article_path(@article), method: :delete, data: {confirrm: 'Are you sure?'}, class: 'btn btn-danger' %>

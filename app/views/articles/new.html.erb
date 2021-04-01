@@ -1,4 +1,9 @@
 <div class="container">
   <div class="display-2 text-center pt-5">New Article</div>
+<% if logged_in?(:editor) %>
   <%= render 'form' %>
+<% else %>
+  You must have permission to perform this action
+<% end %>
+
 </div>
