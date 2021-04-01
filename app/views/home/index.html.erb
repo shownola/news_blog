@@ -14,13 +14,16 @@
   </thead>
 
   <tbody>
-    <% @recent_articles.each do |article| %>
-    <tr>
 
+    <% @recent_articles.each do |article| %>
+
+
+    <tr>
       <td><%= article.title %></td>
       <td><%= article.category %></td>
       <td><%= article.user.email %></td>
       <td><%= article.content %></td>
+    
     </tr>
     <% end %>
   </tbody>

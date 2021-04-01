@@ -294,3 +294,69 @@ README.md
     <%#= article[:content] %>
     <% end %>
   <% end %> -->
+
+  def self.recent
+    Article.select('DISTINCT ON ("category") *').order(:category, date: :desc, id: :desc)
+    Article.group(:category).maximum('created_at desc')
+  end
+  #SELECT * FROM articles where category in (SELECT max(id) FROM articles GROUP BY)
+
+  Article.select(:category, :article).group(:category, :article).having("count(*) > 1").last(3)
+
+  # Article.select(:category).map(&:category).uniq.each {|cat| Article.where(category: cat).order('created_at desc')}.last(3)
+
+  ==================
+  articles.rb
+  scope :category, -> {order('category')}
+  scope :recent, -> { order('created_at DESC') }
+
+  # def self.category
+  #   Article.all.pluck(:category).uniq
+  # end
+  =============================
+
+  ROUTES.RB file
+  resources :articles do
+    collection do
+      get :recent
+      get :category
+    end
+  end
+
+==========================
+ARTICLES_CONTROLLER.RB
+
+def recent
+  @articles = Article.recent
+  render action: :index
+end
+
+def category
+  @articles = Article.category
+  render action: :index
+end
+
+==============================
+
+ARTICLES/INDEX.HTML.ERB file
+
+<%= link_to 'Recent', recent_articles_path %>
+<%= link_to 'Category', category_articles_path %>
+
+=============================
+HOMECONTROLLER.RB
+
+# articles = Article.all
+# @categories = articles.group_by {|i| i[:category]}
+# @recent_articles = Article.recent
+
+#@articles = Article.order(:category)
+#@recent_articles = Article.recent
+
+ #@recent_articles = Article.all.group('category')
+ #category = Article.all.pluck(:category).uniq
+ @recent_articles = Article.order(:category)
+# @articles = Article.category
+# @categories = Article.order(:category)
+
+@articles = Article.all
