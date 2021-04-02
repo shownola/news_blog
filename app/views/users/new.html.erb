@@ -1,0 +1,38 @@
+<div class="container pt-5">
+  <div class="card shadow mb-5 bg-white rounded new-form p-4">
+    <div class="display-2 text-center title p-2">Admin's Create New User</div>
+
+
+
+
+      <%= form_for User.new, url: '/create_user', method: :post do |f| %>
+
+
+        <div class="form-group">
+          <%= f.label :email, class: 'labels' %>
+          <%= f.email_field :email, class: 'form-control', placeholder: "Enter email address" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password, class: 'labels' %>
+          <%= f.password_field :password, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation, class: 'labels' %>
+          <%= f.password_field :password_confirmation, class: 'form-control' %>
+        </div>
+
+
+        <div class="actions text-center">
+          <%= f.submit class: 'btn btn-lg' %>
+
+        </div>
+      <% end %>
+    </div>
+
+      <p><%= link_to 'All Users', users_path, class: 'links' %></p>
+    </div>
+</div>
+
+<div class="container pb-5">
