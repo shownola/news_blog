@@ -6,16 +6,7 @@ class Article < ApplicationRecord
   validates :category, presence: true, length: {minimum: 2, maximum: 150}
   validates :user_id, presence: true
 
-
-
-
-
-  def self.recent
-    order(:category)
-  end
-
-  
-
+  scope :category, -> {order(:category)}
 
 
 
